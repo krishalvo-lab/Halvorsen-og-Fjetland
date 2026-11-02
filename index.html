@@ -1,0 +1,488 @@
+<!doctype html>
+<html lang="nb">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Halvorsen og Fjetland – maskinutleie på Haugalandet</title>
+<meta name="description" content="Utleie av minigravere, minilaster, beltedumper og fjernstyrt beitepusser på Haugalandet.">
+<meta name="robots" content="noindex">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#17191C;--steel:#24272B;--ground:#F4F2ED;--sand:#E9E5DC;--line:#DDD9D0;--muted:#5A5F66;--body:#3A3E44;--yellow:#F5B800}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:Inter,system-ui,sans-serif;color:var(--ink);background:var(--ground);-webkit-font-smoothing:antialiased}
+section[id]{scroll-margin-top:84px}
+a{color:var(--ink)}
+.wrap{max-width:1200px;margin:0 auto;padding:0 24px}
+.display{font-family:Archivo,sans-serif;font-weight:900;font-stretch:112%;line-height:1;margin:0}
+h2.display{font-size:clamp(34px,4vw,52px)}
+.eyebrow{margin:0;font-size:13px;font-weight:600;letter-spacing:.2em;color:var(--muted)}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 24px;border-radius:3px;font-weight:600;font-size:16px;text-decoration:none;border:2px solid var(--ink);cursor:pointer;font-family:inherit}
+.btn-dark{background:var(--ink);color:var(--ground)}
+.btn-dark:hover{background:#000;color:#fff}
+.btn-line{background:transparent;color:var(--ink)}
+.btn-line:hover{background:var(--ink);color:var(--ground)}
+.btn-yellow{background:var(--yellow);border-color:var(--yellow);color:var(--ink)}
+
+/* header */
+header{position:sticky;top:0;z-index:10;background:rgba(244,242,237,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+nav{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 24px;padding-top:14px;padding-bottom:14px}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none}
+.brand-name{display:flex;flex-direction:column;line-height:1}
+.brand-name b{font-family:Archivo,sans-serif;font-weight:800;font-stretch:125%;font-size:17px;letter-spacing:.01em}
+.brand-name small{font-size:11px;font-weight:600;letter-spacing:.22em;color:var(--muted);margin-top:5px}
+.links{display:flex;flex-wrap:wrap;align-items:center;gap:8px 24px;font-size:15px;font-weight:500}
+.links a{text-decoration:none}
+.links a:not(.btn):hover{text-decoration:underline}
+.links .btn{min-height:44px;padding:0 18px;font-size:15px}
+
+/* hero */
+.hero{display:flex;flex-wrap:wrap;gap:56px;align-items:center;padding-top:80px;padding-bottom:96px}
+.hero-text{flex:1 1 460px;min-width:0;display:flex;flex-direction:column;gap:28px}
+.hero h1{font-size:clamp(44px,6.4vw,84px);line-height:.96;letter-spacing:-.01em}
+.hero h1 span{background:var(--yellow);padding:0 10px;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.lead{margin:0;font-size:19px;line-height:1.55;color:var(--body);max-width:540px}
+.cta{display:flex;flex-wrap:wrap;gap:12px}
+.hero-visual{flex:1 1 440px;min-width:0;position:relative}
+.ph{background:#E7E3DA;color:var(--muted);display:flex;align-items:center;justify-content:center;font-size:14px;text-align:center;padding:16px}
+.hero-visual .ph{aspect-ratio:5/4;background:var(--steel);color:#A9AEB5;border-radius:4px}
+.tag{position:absolute;left:-12px;bottom:-20px;background:var(--yellow);padding:14px 18px;border-radius:3px;font-family:Archivo,sans-serif;font-weight:800;font-stretch:115%;font-size:15px;letter-spacing:.02em}
+
+/* strip */
+.strip{background:var(--ink);color:var(--ground)}
+.strip .wrap{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:24px;padding-top:32px;padding-bottom:32px}
+.strip div div{display:flex;align-items:center;gap:14px;font-weight:500}
+
+/* machines */
+.block{padding-top:104px;padding-bottom:104px;display:flex;flex-direction:column;gap:44px}
+.head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:16px}
+.head p{margin:0;font-size:17px;color:var(--muted);max-width:460px;line-height:1.5}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px}
+.card{background:#fff;border:1px solid var(--line);border-radius:4px;display:flex;flex-direction:column;overflow:hidden}
+.card .ph{aspect-ratio:4/3}
+.card-body{padding:24px;display:flex;flex-direction:column;gap:12px;flex-grow:1}
+.model{margin:0;font-size:12px;font-weight:600;letter-spacing:.16em;color:var(--muted)}
+.card h3{margin:0;font-family:Archivo,sans-serif;font-weight:800;font-stretch:112%;font-size:22px}
+.card p.desc{margin:0;font-size:15px;line-height:1.55;color:var(--body)}
+.specs{list-style:none;margin:auto 0 0;padding:14px 0 0;border-top:1px solid #ECE8E0;display:flex;flex-direction:column;gap:6px;font-size:14px;color:var(--muted)}
+.specs b{color:var(--ink);font-weight:600}
+.price{margin:0;font-family:Archivo,sans-serif;font-weight:800;font-size:18px}
+.card-actions{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.card-actions button{background:none;border:0;padding:8px 0;font:inherit;font-weight:600;font-size:15px;text-decoration:underline;cursor:pointer;color:var(--ink)}
+
+/* tools */
+.tools{background:var(--steel);color:var(--ground)}
+.tools .block{padding-top:88px;padding-bottom:88px}
+.chips{display:flex;flex-wrap:wrap;gap:10px;list-style:none;margin:0;padding:0}
+.chips li{border:1px solid #4A4F56;border-radius:3px;padding:10px 14px;font-size:15px}
+.tools p.note{margin:0;color:#C9CDD2;font-size:15px}
+
+/* calendar */
+.cal-sec{background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.cal-layout{display:flex;flex-wrap:wrap;gap:56px;align-items:flex-start}
+.cal-side{flex:1 1 340px;min-width:0;display:flex;flex-direction:column;gap:22px}
+.cal-side p{margin:0;font-size:17px;line-height:1.55;color:var(--body)}
+.mlist{display:flex;flex-direction:column;gap:8px}
+.mlist button{font:inherit;font-size:16px;text-align:left;min-height:48px;padding:10px 16px;border-radius:3px;border:2px solid var(--line);background:#fff;color:var(--ink);cursor:pointer;display:flex;justify-content:space-between;gap:12px;align-items:center}
+.mlist button span{font-size:13px;color:var(--muted)}
+.mlist button[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--ground);font-weight:600}
+.mlist button[aria-pressed="true"] span{color:#C9CDD2}
+.legend{display:flex;flex-wrap:wrap;gap:18px;font-size:14px;color:var(--body)}
+.legend span{display:flex;align-items:center;gap:8px}
+.sw{width:16px;height:16px;border-radius:2px;display:inline-block}
+.sw-free{border:1px solid #C9C4B9;background:#fff}
+.sw-busy{background:repeating-linear-gradient(135deg,#D9D5CC 0 4px,#E9E5DC 4px 8px)}
+.sw-sel{background:var(--yellow)}
+.cal{flex:1 1 520px;min-width:0;background:var(--ground);border-radius:4px;padding:28px;display:flex;flex-direction:column;gap:18px}
+.cal-top{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.cal-top p{margin:0;font-family:Archivo,sans-serif;font-weight:800;font-stretch:112%;font-size:22px;text-transform:capitalize}
+.icon-btn{width:44px;height:44px;border-radius:3px;border:1px solid #C9C4B9;background:#fff;color:var(--ink);cursor:pointer;display:flex;align-items:center;justify-content:center}
+.icon-btn:disabled{opacity:.35;cursor:default}
+.dow,.days{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px}
+.dow span{text-align:center;font-size:12px;font-weight:600;letter-spacing:.08em;color:var(--muted)}
+.days button{font:inherit;height:48px;border-radius:3px;font-size:15px;border:1px solid #C9C4B9;background:#fff;color:var(--ink);font-weight:600;cursor:pointer}
+.days button:disabled{cursor:default}
+.days button.past{border:0;background:transparent;color:#A9A59C;font-weight:400}
+.days button.busy{border:0;background:repeating-linear-gradient(135deg,#D9D5CC 0 4px,#E9E5DC 4px 8px);color:var(--muted);text-decoration:line-through;font-weight:400}
+.days button.sel{background:var(--yellow);border:2px solid var(--ink);font-weight:800}
+.cal-foot{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px;border-top:1px solid var(--line);padding-top:18px;min-height:66px}
+.cal-foot p{margin:0;font-size:16px}
+.cal-foot .muted{color:var(--muted);font-size:15px}
+
+/* prices */
+.prices{background:var(--sand)}
+.pgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
+.pcard{background:#fff;border-radius:4px;padding:32px;display:flex;flex-direction:column;gap:10px}
+.pcard.dark{background:var(--ink);color:var(--ground)}
+.pcard .eyebrow{letter-spacing:.18em}
+.pcard.dark .eyebrow{color:var(--yellow)}
+.pcard .amount{font-size:40px}
+.pcard p.sub{margin:0;font-size:15px;line-height:1.5;color:var(--body)}
+.pcard.dark p.sub{color:#C9CDD2}
+.fine{margin:0;font-size:14px;color:var(--muted)}
+
+/* steps */
+.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:32px}
+.steps li{display:flex;flex-direction:column;gap:12px;border-top:3px solid var(--ink);padding-top:20px}
+.steps li.hl{border-top-color:var(--yellow)}
+.steps .n{font-family:Archivo,sans-serif;font-weight:900;font-stretch:125%;font-size:36px}
+.steps h3{margin:0;font-size:19px;font-weight:600}
+.steps p{margin:0;font-size:15px;line-height:1.55;color:var(--body)}
+
+/* contact */
+.contact{background:var(--ink);color:var(--ground)}
+.contact-layout{display:flex;flex-wrap:wrap;gap:64px;padding-top:104px;padding-bottom:104px}
+.contact-info{flex:1 1 340px;min-width:0;display:flex;flex-direction:column;gap:28px}
+.contact-info p.lead{color:#C9CDD2;max-width:420px;font-size:17px}
+.facts{display:flex;flex-direction:column;gap:16px;font-size:16px}
+.facts div{display:flex;flex-direction:column;gap:2px}
+.facts small{font-size:12px;font-weight:600;letter-spacing:.18em;color:var(--yellow)}
+.facts a{color:var(--ground)}
+form{flex:1 1 460px;min-width:0;background:var(--steel);border-radius:4px;padding:32px;display:flex;flex-direction:column;gap:18px}
+.row{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px}
+label{display:flex;flex-direction:column;gap:6px;font-size:14px;font-weight:500;color:#C9CDD2}
+input,select,textarea{font:inherit;font-size:16px;color:var(--ground);background:var(--ink);border:1px solid #4A4F56;border-radius:3px;padding:12px 14px;color-scheme:dark}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--yellow);outline-offset:1px}
+textarea{resize:vertical}
+form .btn{align-self:flex-start}
+.status{border-radius:3px;padding:14px 16px;font-size:15px;font-weight:600;background:var(--yellow);color:var(--ink)}
+.status[hidden]{display:none}
+
+footer{background:var(--ink);color:#A9AEB5;border-top:1px solid #33373D}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:16px;padding-top:28px;padding-bottom:28px;font-size:14px}
+footer .left{display:flex;align-items:center;gap:12px}
+
+:focus-visible{outline:3px solid var(--yellow);outline-offset:2px}
+@media (max-width:640px){
+ header{position:static}
+ section[id]{scroll-margin-top:0}
+ .hero{padding-top:48px;gap:44px}
+ .block{padding-top:72px;padding-bottom:72px}
+ .contact-layout{padding-top:72px;padding-bottom:72px}
+ .cal{padding:16px}
+ .days button{height:42px}
+ .links{gap:6px 16px}
+}
+</style>
+</head>
+<body>
+
+<header>
+<nav class="wrap" aria-label="Hovedmeny">
+<a class="brand" href="#top">
+<svg width="56" height="35" viewBox="0 0 64 40" aria-hidden="true"><rect x="1.5" y="1.5" width="61" height="37" rx="18.5" fill="none" stroke="#17191C" stroke-width="3" stroke-dasharray="3.2 2.6"/><rect x="6" y="6" width="52" height="28" rx="14" fill="#F5B800" stroke="#17191C" stroke-width="2.5"/><text x="32" y="25.2" text-anchor="middle" font-family="Archivo, Arial Black, sans-serif" font-weight="900" font-size="14" style="font-stretch:125%" fill="#17191C">H&amp;F</text></svg>
+<span class="brand-name"><b>HALVORSEN &amp; FJETLAND</b><small>MASKINUTLEIE</small></span>
+</a>
+<div class="links">
+<a href="#maskiner">Maskiner</a>
+<a href="#ledighet">Ledighet</a>
+<a href="#priser">Priser</a>
+<a href="#slik">Slik leier du</a>
+<a class="btn btn-dark" href="#ledighet">Book maskin</a>
+</div>
+</nav>
+</header>
+
+<main id="top">
+
+<section class="wrap hero">
+<div class="hero-text">
+<p class="eyebrow">MINIMASKINER TIL LEIE · HAUGALANDET</p>
+<h1 class="display">Små maskiner.<br><span>Store jobber.</span></h1>
+<p class="lead">Minigravere fra 1,2 til 2,5 tonn, minilaster, beltedumper og fjernstyrt beitepusser – for deg som vil gjøre jobben selv.</p>
+<div class="cta">
+<a class="btn btn-dark" href="#maskiner">Se maskinene</a>
+<a class="btn btn-line" href="#ledighet">Sjekk ledige datoer</a>
+</div>
+</div>
+<div class="hero-visual">
+<div class="ph">Bilde av maskinparken kommer</div>
+<div class="tag">DAG · HELG · LEVERING</div>
+</div>
+</section>
+
+<section class="strip" aria-label="Kort fortalt">
+<div class="wrap">
+<div><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#F5B800" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="1"/><path d="M3 10h18M8 3v4M16 3v4"/></svg><span>Dags- og helgeleie</span></div>
+<div><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#F5B800" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 16h13V7H2zM15 11h4l3 3v2h-7"/><circle cx="6" cy="18" r="2"/><circle cx="18" cy="18" r="2"/></svg><span>Hent selv eller få levert</span></div>
+<div><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#F5B800" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.2 7-12a7 7 0 0 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg><span>Lokalt på Haugalandet</span></div>
+</div>
+</section>
+
+<section id="maskiner" class="wrap block">
+<div class="head">
+<h2 class="display">Maskinparken</h2>
+<p>Kompakte maskiner for hage, tomt og grovarbeid. Alle gravemaskinene leveres med hurtigkobling og skuffer.</p>
+</div>
+<div class="grid" id="machine-grid"></div>
+</section>
+
+<section class="tools" aria-labelledby="redskap-tittel">
+<div class="wrap block">
+<h2 class="display" id="redskap-tittel">Redskap</h2>
+<ul class="chips">
+<li>Graveskuffe 20 cm</li>
+<li>Standardskuffe 60 cm</li>
+<li>Tiltskuffe 80 cm</li>
+<li>Planeringsskuffe 100 cm</li>
+<li>Sorteringsskuffe 80 cm</li>
+<li>Hydraulisk hurtigkobling</li>
+<li>Hydraulisk tommel</li>
+<li>Rivetann</li>
+<li>Hydraulisk hammer</li>
+<li>Pallegaffel</li>
+<li>Snøfreser</li>
+</ul>
+<p class="note">Si fra hva du skal gjøre, så sender vi med riktig redskap.</p>
+</div>
+</section>
+
+<section id="ledighet" class="cal-sec">
+<div class="wrap block">
+<div class="cal-layout">
+<div class="cal-side">
+<h2 class="display">Ledige dager</h2>
+<p>Velg maskin og trykk på en ledig dag. Forespørselen fylles ut for deg.</p>
+<div class="mlist" id="mlist" role="group" aria-label="Velg maskin"></div>
+<div class="legend">
+<span><i class="sw sw-free"></i>Ledig</span>
+<span><i class="sw sw-busy"></i>Opptatt</span>
+<span><i class="sw sw-sel"></i>Valgt</span>
+</div>
+</div>
+<div class="cal">
+<div class="cal-top">
+<button class="icon-btn" id="prev" type="button" aria-label="Forrige måned"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg></button>
+<p id="month" aria-live="polite"></p>
+<button class="icon-btn" id="next" type="button" aria-label="Neste måned"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button>
+</div>
+<div class="dow" aria-hidden="true"><span>MAN</span><span>TIR</span><span>ONS</span><span>TOR</span><span>FRE</span><span>LØR</span><span>SØN</span></div>
+<div class="days" id="days"></div>
+<div class="cal-foot" id="calfoot"><p class="muted">Ingen dag valgt ennå.</p></div>
+</div>
+</div>
+</div>
+</section>
+
+<section id="priser" class="prices">
+<div class="wrap block">
+<h2 class="display">Enkle priser</h2>
+<div class="pgrid">
+<div class="pcard"><p class="eyebrow">DAGSLEIE</p><p class="display amount">[PRIS] kr</p><p class="sub">Hent om morgenen, lever på kvelden.</p></div>
+<div class="pcard dark"><p class="eyebrow">HELGELEIE</p><p class="display amount">[PRIS] kr</p><p class="sub">Fredag ettermiddag til mandag morgen.</p></div>
+<div class="pcard"><p class="eyebrow">LEVERING</p><p class="display amount">[PRIS] kr</p><p class="sub">Per tur med henger, levert og hentet på tomta.</p></div>
+</div>
+<p class="fine">Alle priser eks. mva. Ekstra redskap leies i tillegg.</p>
+</div>
+</section>
+
+<section id="slik" class="wrap block">
+<h2 class="display">Slik leier du</h2>
+<ol class="steps">
+<li><span class="n">01</span><h3>Book</h3><p>Velg dag i kalenderen, ring eller send SMS. Vi bekrefter dato og maskin.</p></li>
+<li><span class="n">02</span><h3>Hent eller få levert</h3><p>Ta med gyldig legitimasjon. Vi går gjennom maskinen før du kjører.</p></li>
+<li class="hl"><span class="n">03</span><h3>Gravemelding først</h3><p>Før du graver: meld fra og få kabelpåvisning via <a href="https://gravemelding.no" target="_blank" rel="noopener">gravemelding.no</a>. Det er leietakers ansvar.</p></li>
+<li><span class="n">04</span><h3>Lever tilbake</h3><p>Rengjort og fylt opp, til avtalt tid. Ferdig.</p></li>
+</ol>
+</section>
+
+<section id="kontakt" class="contact">
+<div class="wrap contact-layout">
+<div class="contact-info">
+<h2 class="display">Klar til å grave?</h2>
+<p class="lead">Fortell hva jobben er, så finner vi riktig maskin og en dato som passer.</p>
+<div class="facts">
+<div><small>TELEFON</small><span id="c-phone">[TELEFON]</span></div>
+<div><small>E-POST</small><span id="c-mail">[E-POST]</span></div>
+<div><small>HENTESTED</small><span>[ADRESSE], Haugalandet</span></div>
+</div>
+</div>
+<form id="form" novalidate>
+<p class="status" id="status" role="status" hidden></p>
+<div class="row">
+<label>Navn<input type="text" name="navn" autocomplete="name" required></label>
+<label>Telefon<input type="tel" name="telefon" autocomplete="tel" required></label>
+</div>
+<div class="row">
+<label>Maskin<select name="maskin" id="f-maskin"></select></label>
+<label>Ønsket dato<input type="date" name="dato" id="f-dato"></label>
+</div>
+<label>Hva skal gjøres?<textarea name="melding" rows="4"></textarea></label>
+<button class="btn btn-yellow" type="submit">Send forespørsel</button>
+</form>
+</div>
+</section>
+
+</main>
+
+<footer>
+<div class="wrap">
+<div class="left">
+<svg width="40" height="25" viewBox="0 0 64 40" aria-hidden="true"><rect x="1.5" y="1.5" width="61" height="37" rx="18.5" fill="none" stroke="#F5B800" stroke-width="3" stroke-dasharray="3.2 2.6"/><rect x="6" y="6" width="52" height="28" rx="14" fill="#F5B800"/><text x="32" y="25.2" text-anchor="middle" font-family="Archivo, Arial Black, sans-serif" font-weight="900" font-size="14" style="font-stretch:125%" fill="#17191C">H&amp;F</text></svg>
+<span>Halvorsen og Fjetland AS · Org.nr. 938 423 415</span>
+</div>
+<span>Maskinutleie på Haugalandet</span>
+</div>
+</footer>
+
+<script>
+// ---- Rediger her ----------------------------------------------------------
+const KONTAKT = {
+  telefon: '',   // f.eks. '+47 900 00 000'
+  epost: ''      // forespørsler sendes hit via e-postprogrammet til kunden
+};
+
+const MASKINER = [
+  { id: 'vtw12s', navn: 'Minigraver 1,2 t', modell: 'VOTE VTW-12S',
+    tekst: 'Den letteste i parken. Hage, drenering og småjobber der det er trangt.',
+    specs: [['Vekt', '1,2 tonn'], ['Motor', 'Koop 192 diesel'], ['Førerplass', 'Kalesje'], ['Betjening', 'Hydraulisk joystick, sideswing']] },
+  { id: 'vtw18', navn: 'Minigraver 1,8 t', modell: 'VOTE VTW-18',
+    tekst: 'Allrounderen. Grøfter, kabel og fundament – med hytte for norsk vær.',
+    specs: [['Vekt', '1,8 tonn'], ['Motor', 'Laidong diesel'], ['Førerplass', 'Hytte'], ['Betjening', 'Servostyrt, sideswing, utvidbart understell']] },
+  { id: 'vtw25', navn: 'Minigraver 2,5 t', modell: 'VOTE VTW-25',
+    tekst: 'Den største. Tyngre masse, dypere grøfter og lengre arbeidsdager.',
+    specs: [['Vekt', '2,5 tonn'], ['Motor', 'Kubota D1105 diesel'], ['Førerplass', 'Hytte'], ['Betjening', 'Servostyrt, sideswing, utvidbart understell']] },
+  { id: 'vth480z', navn: 'Minilaster 4WD', modell: 'VOTE VTH-480Z',
+    tekst: 'Kompakt laster på hjul. Flytter masse og paller – og freser snø om vinteren.',
+    specs: [['Drift', 'Firehjulstrekk, luftgummihjul'], ['Motor', 'Koop diesel, elstart'], ['Redskap', 'Skuffe, pallegaffel, snøfreser']] },
+  { id: 'vtys50a', navn: 'Beltedumper 500 kg', modell: 'VOTE VT-YS50A',
+    tekst: 'Tar tunge lass i bratt og bløtt terreng, og løfter og tipper rett i henger.',
+    specs: [['Last', '500 kg'], ['Motor', 'Koop diesel, elstart'], ['Drift', 'Gummibelter, to hastigheter'], ['Tipp', 'Hydraulisk løft og tipp']] },
+  { id: 'vtgc500', navn: 'RC beitepusser', modell: 'VOTE VT-GC500',
+    tekst: 'Fjernstyrt på belter. Rydder kratt og bratte skråninger mens du står trygt.',
+    specs: [['Klippebredde', '50 cm'], ['Motor', 'Rato bensin, elstart'], ['Drift', 'Gummibelter, fjernstyrt']] }
+];
+// ---------------------------------------------------------------------------
+
+const $ = (s) => document.querySelector(s);
+const pad = (n) => String(n).padStart(2, '0');
+const iso = (d) => d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate());
+const parseIso = (s) => { const [y, m, d] = s.split('-').map(Number); return new Date(y, m - 1, d); };
+
+let bookinger = {};
+const now = new Date();
+const state = { m: 0, y: now.getFullYear(), mo: now.getMonth(), sel: null };
+
+// Kontaktinfo
+if (KONTAKT.telefon) $('#c-phone').innerHTML = '<a href="tel:' + KONTAKT.telefon.replace(/\s/g, '') + '">' + KONTAKT.telefon + '</a>';
+if (KONTAKT.epost) $('#c-mail').innerHTML = '<a href="mailto:' + KONTAKT.epost + '">' + KONTAKT.epost + '</a>';
+
+// Maskinkort
+const grid = $('#machine-grid');
+MASKINER.forEach((m, i) => {
+  const el = document.createElement('article');
+  el.className = 'card';
+  el.innerHTML =
+    '<div class="ph">Bilde kommer</div>' +
+    '<div class="card-body">' +
+    '<p class="model">' + m.modell + '</p>' +
+    '<h3>' + m.navn + '</h3>' +
+    '<p class="desc">' + m.tekst + '</p>' +
+    '<ul class="specs">' + m.specs.map(s => '<li>' + s[0] + ': <b>' + s[1] + '</b></li>').join('') + '</ul>' +
+    '<div class="card-actions"><p class="price">fra [PRIS] kr/dag</p><button type="button">Se ledighet</button></div>' +
+    '</div>';
+  el.querySelector('button').addEventListener('click', () => {
+    state.m = i; state.sel = null; render();
+    document.getElementById('ledighet').scrollIntoView({ behavior: 'smooth' });
+  });
+  grid.appendChild(el);
+});
+
+// Skjema: maskinvalg
+const fm = $('#f-maskin');
+MASKINER.forEach(m => { const o = document.createElement('option'); o.value = m.navn; o.textContent = m.navn; fm.appendChild(o); });
+const o = document.createElement('option'); o.value = 'Vet ikke – gi meg råd'; o.textContent = 'Vet ikke – gi meg råd'; fm.appendChild(o);
+$('#f-dato').min = iso(now);
+
+// Kalender
+function isBusy(mId, key) { return (bookinger[mId] || []).includes(key); }
+
+function render() {
+  // maskinliste
+  const ml = $('#mlist');
+  ml.innerHTML = '';
+  MASKINER.forEach((m, i) => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.setAttribute('aria-pressed', i === state.m ? 'true' : 'false');
+    b.innerHTML = m.navn + '<span>' + m.modell.replace('VOTE ', '') + '</span>';
+    b.addEventListener('click', () => { state.m = i; state.sel = null; render(); });
+    ml.appendChild(b);
+  });
+
+  const first = new Date(state.y, state.mo, 1);
+  const days = new Date(state.y, state.mo + 1, 0).getDate();
+  const offset = (first.getDay() + 6) % 7;
+  const today = new Date(); today.setHours(0, 0, 0, 0);
+  const monthName = first.toLocaleDateString('nb-NO', { month: 'long' });
+  $('#month').textContent = first.toLocaleDateString('nb-NO', { month: 'long', year: 'numeric' });
+  $('#prev').disabled = state.y < now.getFullYear() || (state.y === now.getFullYear() && state.mo <= now.getMonth());
+
+  const mId = MASKINER[state.m].id;
+  const box = $('#days');
+  box.innerHTML = '';
+  for (let i = 0; i < offset; i++) box.appendChild(document.createElement('span'));
+  for (let d = 1; d <= days; d++) {
+    const date = new Date(state.y, state.mo, d);
+    const key = iso(date);
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.textContent = d;
+    if (date < today) { b.className = 'past'; b.disabled = true; b.setAttribute('aria-label', d + '. ' + monthName + ', passert'); }
+    else if (isBusy(mId, key)) { b.className = 'busy'; b.disabled = true; b.setAttribute('aria-label', d + '. ' + monthName + ', opptatt'); }
+    else {
+      const sel = state.sel === key;
+      if (sel) { b.className = 'sel'; b.setAttribute('aria-pressed', 'true'); }
+      b.setAttribute('aria-label', d + '. ' + monthName + ', ledig');
+      b.addEventListener('click', () => { state.sel = key; render(); });
+    }
+    box.appendChild(b);
+  }
+
+  const foot = $('#calfoot');
+  if (state.sel) {
+    const label = parseIso(state.sel).toLocaleDateString('nb-NO', { weekday: 'long', day: 'numeric', month: 'long' });
+    foot.innerHTML = '<p><strong>' + MASKINER[state.m].navn + '</strong> · ' + label + '</p>';
+    const a = document.createElement('a');
+    a.className = 'btn btn-dark'; a.href = '#kontakt'; a.textContent = 'Book denne dagen';
+    a.addEventListener('click', () => { fm.value = MASKINER[state.m].navn; $('#f-dato').value = state.sel; });
+    foot.appendChild(a);
+  } else {
+    foot.innerHTML = '<p class="muted">Ingen dag valgt ennå.</p>';
+  }
+}
+
+$('#prev').addEventListener('click', () => { state.mo--; if (state.mo < 0) { state.mo = 11; state.y--; } render(); });
+$('#next').addEventListener('click', () => { state.mo++; if (state.mo > 11) { state.mo = 0; state.y++; } render(); });
+
+fetch('bookinger.json', { cache: 'no-store' })
+  .then(r => r.ok ? r.json() : {})
+  .then(j => { bookinger = j || {}; render(); })
+  .catch(() => render());
+render();
+
+// Skjema
+$('#form').addEventListener('submit', (e) => {
+  e.preventDefault();
+  const f = new FormData(e.target);
+  const st = $('#status');
+  if (!f.get('navn') || !f.get('telefon')) {
+    st.textContent = 'Fyll inn navn og telefon.'; st.hidden = false; return;
+  }
+  const body = 'Navn: ' + f.get('navn') + '\nTelefon: ' + f.get('telefon') + '\nMaskin: ' + f.get('maskin') +
+    '\nØnsket dato: ' + (f.get('dato') || 'ikke valgt') + '\n\n' + (f.get('melding') || '');
+  if (KONTAKT.epost) {
+    location.href = 'mailto:' + KONTAKT.epost + '?subject=' + encodeURIComponent('Leieforespørsel – ' + f.get('maskin')) + '&body=' + encodeURIComponent(body);
+    st.textContent = 'E-postprogrammet ditt åpnes med forespørselen ferdig utfylt.';
+  } else {
+    st.textContent = 'Skjemaet er ikke koblet opp ennå. Ring oss i mellomtiden.';
+  }
+  st.hidden = false;
+});
+</script>
+</body>
+</html>
