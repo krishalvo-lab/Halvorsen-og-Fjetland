@@ -6,13 +6,28 @@ Statisk nettside for maskinutleie, publisert med GitHub Pages.
 
 - **Telefon, e-post og maskiner:** øverst i `<script>` nederst i `index.html` (`KONTAKT` og `MASKINER`).
 - **Priser, adresse:** søk etter `[PRIS]` og `[ADRESSE]` i `index.html`.
-- **Opptatte dager:** legg datoer inn i `bookinger.json`, per maskin, format `ÅÅÅÅ-MM-DD`:
+- **Opptatte dager** hentes automatisk fra Google-kalenderen «H&F booking» hvert 30. minutt
+  (se under). `bookinger.json` skal ikke redigeres for hånd.
 
-```json
-{ "vtw18": ["2026-12-05", "2026-12-06"] }
-```
+## Booking i kalenderen
 
-Rediger rett på github.com (blyant-ikonet), så er siden oppdatert etter et minutt.
+Legg bookingen inn i «H&F booking» med maskinen i tittelen, f.eks.:
+
+| Maskin | Skriv i tittelen (ett av) |
+|---|---|
+| Minigraver 1,2 t | `1,2 t` eller `VTW-12` |
+| Minigraver 1,8 t | `1,8 t` eller `VTW-18` |
+| Minigraver 2,5 t | `2,5 t` eller `VTW-25` |
+| Minilaster 4WD | `Minilaster` |
+| Beltedumper | `Dumper` |
+| RC beitepusser | `Beitepusser` |
+
+Eksempel: «Minigraver 1,8 t – Ola, Karmøy». Alle dager hendelsen dekker vises som opptatt.
+Bare maskin og dato publiseres – aldri navn eller detaljer.
+
+Oppsett (én gang): Settings → Secrets and variables → Actions → New repository secret,
+navn `GCAL_ICS_URL`, verdi = «Hemmelig adresse i iCal-format» fra kalenderens innstillinger.
+Kjør manuelt under Actions → «Synk bookinger fra kalender» → Run workflow.
 
 ## Før lansering
 

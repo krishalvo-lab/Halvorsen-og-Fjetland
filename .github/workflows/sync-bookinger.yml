@@ -1,0 +1,40 @@
+name: Synk bookinger fra kalender
+
+on:
+  schedule:
+    - cron: "*/30 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sync-bookinger
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Hent kalender
+        env:
+          GCAL_ICS_URL: ${{ secrets.GCAL_ICS_URL }}
+        run: python scripts/sync_bookinger.py
+
+      - name: Lagre endringer
+        run: |
+          if git diff --quiet bookinger.json; then
+            echo "Ingen endringer."
+            exit 0
+          fi
+          git config user.name "booking-sync"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add bookinger.json
+          git commit -m "Oppdater ledighet fra kalender"
+          git push
