@@ -153,6 +153,7 @@ form .btn{align-self:flex-start}
 .status{border-radius:3px;padding:14px 16px;font-size:15px;font-weight:600;background:var(--yellow);color:var(--ink)}
 .status[hidden]{display:none}
 .mail-btn{align-self:flex-start;font-size:18px;min-height:56px;padding:0 26px;word-break:break-all}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
 .form-intro{margin:0;color:#C9CDD2;font-size:15px}
 
 footer{background:var(--ink);color:#A9AEB5;border-top:1px solid #33373D}
@@ -305,18 +306,21 @@ footer .left{display:flex;align-items:center;gap:12px}
 </div>
 </div>
 <form id="form" novalidate>
-<p class="form-intro">Eller fyll ut her, så lager vi e-posten for deg:</p>
+<p class="form-intro">Eller send forespørselen herfra – den går rett til innboksen vår:</p>
 <p class="status" id="status" role="status" hidden></p>
 <div class="row">
 <label>Navn<input type="text" name="navn" autocomplete="name" required></label>
-<label>Telefon<input type="tel" name="telefon" autocomplete="tel" required></label>
+<label>Telefon<input type="tel" name="telefon" autocomplete="tel"></label>
 </div>
+<label>E-post<input type="email" name="epost" autocomplete="email"></label>
+<div class="hp" aria-hidden="true"><label>Nettside<input type="text" name="nettside" tabindex="-1" autocomplete="off"></label></div>
+<input type="hidden" name="ts" id="f-ts">
 <div class="row">
 <label>Maskin<select name="maskin" id="f-maskin"></select></label>
 <label>Ønsket dato<input type="date" name="dato" id="f-dato"></label>
 </div>
 <label>Hva skal gjøres?<textarea name="melding" rows="4"></textarea></label>
-<button class="btn btn-yellow" type="submit">Lag e-post</button>
+<button class="btn btn-yellow" type="submit" id="f-send">Send forespørsel</button>
 </form>
 </div>
 </section>
@@ -466,23 +470,30 @@ fetch('bookinger.json', { cache: 'no-store' })
   .catch(() => render());
 render();
 
-// Skjema
-$('#form').addEventListener('submit', (e) => {
+// Skjema – sendes til webhotellet, som videresender til post@
+const SKJEMA_URL = 'https://admin.halvorsenogfjetland.no/kontakt.php';
+$('#f-ts').value = Date.now();
+$('#form').addEventListener('submit', async (e) => {
   e.preventDefault();
-  const f = new FormData(e.target);
-  const st = $('#status');
-  if (!f.get('navn') || !f.get('telefon')) {
-    st.textContent = 'Fyll inn navn og telefon.'; st.hidden = false; return;
+  const form = e.target, f = new FormData(form), st = $('#status'), knapp = $('#f-send');
+  if (!f.get('navn') || (!f.get('telefon') && !f.get('epost'))) {
+    st.textContent = 'Fyll inn navn og telefon eller e-post.'; st.hidden = false; return;
   }
-  const body = 'Navn: ' + f.get('navn') + '\nTelefon: ' + f.get('telefon') + '\nMaskin: ' + f.get('maskin') +
-    '\nØnsket dato: ' + (f.get('dato') || 'ikke valgt') + '\n\n' + (f.get('melding') || '');
-  if (KONTAKT.epost) {
+  knapp.disabled = true; knapp.textContent = 'Sender …';
+  try {
+    const r = await fetch(SKJEMA_URL, { method: 'POST', body: f });
+    const j = await r.json().catch(() => ({}));
+    if (!r.ok || !j.ok) throw new Error(j.feil || 'feil');
+    form.reset(); $('#f-ts').value = Date.now();
+    st.textContent = 'Takk! Forespørselen er sendt. Vi tar kontakt så snart vi kan.';
+  } catch (err) {
+    // Reserve: åpne e-postprogrammet med forespørselen ferdig utfylt
+    const body = 'Navn: ' + f.get('navn') + '\nTelefon: ' + (f.get('telefon') || '') + '\nE-post: ' + (f.get('epost') || '') +
+      '\nMaskin: ' + f.get('maskin') + '\nØnsket dato: ' + (f.get('dato') || 'ikke valgt') + '\n\n' + (f.get('melding') || '');
     location.href = 'mailto:' + KONTAKT.epost + '?subject=' + encodeURIComponent('Leieforespørsel – ' + f.get('maskin')) + '&body=' + encodeURIComponent(body);
-    st.textContent = 'E-postprogrammet ditt åpnes med forespørselen ferdig utfylt.';
-  } else {
-    st.textContent = 'Send en e-post til oss i mellomtiden.';
+    st.textContent = (err.message && err.message !== 'feil' && err.message !== 'Failed to fetch' ? err.message + ' ' : '') + 'Vi åpnet e-postprogrammet ditt med forespørselen – trykk Send der.';
   }
-  st.hidden = false;
+  st.hidden = false; knapp.disabled = false; knapp.textContent = 'Send forespørsel';
 });
 </script>
 </body>
