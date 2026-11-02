@@ -140,6 +140,7 @@ nav{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between
 .contact-info p.lead{color:#C9CDD2;max-width:420px;font-size:17px}
 .facts{display:flex;flex-direction:column;gap:16px;font-size:16px}
 .facts div{display:flex;flex-direction:column;gap:2px}
+.facts div[hidden]{display:none}
 .facts small{font-size:12px;font-weight:600;letter-spacing:.18em;color:var(--yellow)}
 .facts a{color:var(--ground)}
 form{flex:1 1 460px;min-width:0;background:var(--steel);border-radius:4px;padding:32px;display:flex;flex-direction:column;gap:18px}
@@ -151,6 +152,8 @@ textarea{resize:vertical}
 form .btn{align-self:flex-start}
 .status{border-radius:3px;padding:14px 16px;font-size:15px;font-weight:600;background:var(--yellow);color:var(--ink)}
 .status[hidden]{display:none}
+.mail-btn{align-self:flex-start;font-size:18px;min-height:56px;padding:0 26px;word-break:break-all}
+.form-intro{margin:0;color:#C9CDD2;font-size:15px}
 
 footer{background:var(--ink);color:#A9AEB5;border-top:1px solid #33373D}
 footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:16px;padding-top:28px;padding-bottom:28px;font-size:14px}
@@ -182,7 +185,7 @@ footer .left{display:flex;align-items:center;gap:12px}
 <a href="#ledighet">Ledighet</a>
 <a href="#priser">Priser</a>
 <a href="#slik">Slik leier du</a>
-<a class="btn btn-dark" href="#ledighet">Book maskin</a>
+<a class="btn btn-dark" href="#kontakt">Book maskin</a>
 </div>
 </nav>
 </header>
@@ -246,7 +249,7 @@ footer .left{display:flex;align-items:center;gap:12px}
 <div class="cal-layout">
 <div class="cal-side">
 <h2 class="display">Ledige dager</h2>
-<p>Velg maskin og trykk på en ledig dag. Forespørselen fylles ut for deg.</p>
+<p>Velg maskin og trykk på en ledig dag, så lager vi e-posten til oss ferdig utfylt.</p>
 <div class="mlist" id="mlist" role="group" aria-label="Velg maskin"></div>
 <div class="legend">
 <span><i class="sw sw-free"></i>Ledig</span>
@@ -283,7 +286,7 @@ footer .left{display:flex;align-items:center;gap:12px}
 <section id="slik" class="wrap block">
 <h2 class="display">Slik leier du</h2>
 <ol class="steps">
-<li><span class="n">01</span><h3>Book</h3><p>Velg dag i kalenderen, ring eller send SMS. Vi bekrefter dato og maskin.</p></li>
+<li><span class="n">01</span><h3>Send e-post</h3><p>Skriv til <a href="mailto:post@halvorsenogfjetland.no">post@halvorsenogfjetland.no</a> hvilken maskin og dato du ønsker. Vi tar kontakt og bekrefter.</p></li>
 <li><span class="n">02</span><h3>Hent eller få levert</h3><p>Ta med gyldig legitimasjon. Vi går gjennom maskinen før du kjører.</p></li>
 <li class="hl"><span class="n">03</span><h3>Gravemelding først</h3><p>Før du graver: meld fra og få kabelpåvisning via <a href="https://gravemelding.no" target="_blank" rel="noopener">gravemelding.no</a>. Det er leietakers ansvar.</p></li>
 <li><span class="n">04</span><h3>Lever tilbake</h3><p>Rengjort og fylt opp, til avtalt tid. Ferdig.</p></li>
@@ -293,15 +296,16 @@ footer .left{display:flex;align-items:center;gap:12px}
 <section id="kontakt" class="contact">
 <div class="wrap contact-layout">
 <div class="contact-info">
-<h2 class="display">Klar til å grave?</h2>
-<p class="lead">Fortell hva jobben er, så finner vi riktig maskin og en dato som passer.</p>
+<h2 class="display">Book på e-post</h2>
+<p class="lead">Send oss en e-post med maskin, ønsket dato og hva jobben er. Vi tar kontakt, bekrefter bookingen og avtaler henting eller levering.</p>
+<a class="btn btn-yellow mail-btn" href="mailto:post@halvorsenogfjetland.no?subject=Leieforesp%C3%B8rsel">post@halvorsenogfjetland.no</a>
 <div class="facts">
-<div><small>TELEFON</small><span id="c-phone">[TELEFON]</span></div>
-<div><small>E-POST</small><span id="c-mail">[E-POST]</span></div>
+<div id="row-phone" hidden><small>TELEFON</small><span id="c-phone"></span></div>
 <div><small>HENTESTED</small><span>[ADRESSE], Haugalandet</span></div>
 </div>
 </div>
 <form id="form" novalidate>
+<p class="form-intro">Eller fyll ut her, så lager vi e-posten for deg:</p>
 <p class="status" id="status" role="status" hidden></p>
 <div class="row">
 <label>Navn<input type="text" name="navn" autocomplete="name" required></label>
@@ -312,7 +316,7 @@ footer .left{display:flex;align-items:center;gap:12px}
 <label>Ønsket dato<input type="date" name="dato" id="f-dato"></label>
 </div>
 <label>Hva skal gjøres?<textarea name="melding" rows="4"></textarea></label>
-<button class="btn btn-yellow" type="submit">Send forespørsel</button>
+<button class="btn btn-yellow" type="submit">Lag e-post</button>
 </form>
 </div>
 </section>
@@ -365,8 +369,7 @@ const now = new Date();
 const state = { m: 0, y: now.getFullYear(), mo: now.getMonth(), sel: null };
 
 // Kontaktinfo
-if (KONTAKT.telefon) $('#c-phone').innerHTML = '<a href="tel:' + KONTAKT.telefon.replace(/\s/g, '') + '">' + KONTAKT.telefon + '</a>';
-if (KONTAKT.epost) $('#c-mail').innerHTML = '<a href="mailto:' + KONTAKT.epost + '">' + KONTAKT.epost + '</a>';
+if (KONTAKT.telefon) { $('#c-phone').innerHTML = '<a href="tel:' + KONTAKT.telefon.replace(/\s/g, '') + '">' + KONTAKT.telefon + '</a>'; $('#row-phone').hidden = false; }
 
 // Maskinkort
 const grid = $('#machine-grid');
@@ -445,8 +448,9 @@ function render() {
     const label = parseIso(state.sel).toLocaleDateString('nb-NO', { weekday: 'long', day: 'numeric', month: 'long' });
     foot.innerHTML = '<p><strong>' + MASKINER[state.m].navn + '</strong> · ' + label + '</p>';
     const a = document.createElement('a');
-    a.className = 'btn btn-dark'; a.href = '#kontakt'; a.textContent = 'Book denne dagen';
-    a.addEventListener('click', () => { fm.value = MASKINER[state.m].navn; $('#f-dato').value = state.sel; });
+    a.className = 'btn btn-dark'; a.textContent = 'Send forespørsel på e-post';
+    a.href = 'mailto:' + KONTAKT.epost + '?subject=' + encodeURIComponent('Leieforespørsel – ' + MASKINER[state.m].navn + ', ' + label) +
+      '&body=' + encodeURIComponent('Hei!\n\nJeg vil gjerne leie ' + MASKINER[state.m].navn + ' ' + label + '.\n\nHva skal gjøres:\n\nNavn:\nTelefon:\nHenting eller levering (adresse):\n');
     foot.appendChild(a);
   } else {
     foot.innerHTML = '<p class="muted">Ingen dag valgt ennå.</p>';
@@ -476,7 +480,7 @@ $('#form').addEventListener('submit', (e) => {
     location.href = 'mailto:' + KONTAKT.epost + '?subject=' + encodeURIComponent('Leieforespørsel – ' + f.get('maskin')) + '&body=' + encodeURIComponent(body);
     st.textContent = 'E-postprogrammet ditt åpnes med forespørselen ferdig utfylt.';
   } else {
-    st.textContent = 'Skjemaet er ikke koblet opp ennå. Ring oss i mellomtiden.';
+    st.textContent = 'Send en e-post til oss i mellomtiden.';
   }
   st.hidden = false;
 });
