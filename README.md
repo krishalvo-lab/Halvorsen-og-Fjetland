@@ -15,7 +15,6 @@ Legg bookingen inn i «H&F booking» med maskinen i tittelen, f.eks.:
 
 | Maskin | Skriv i tittelen (ett av) |
 |---|---|
-| Minigraver 1,2 t | `1,2 t` eller `VTW-12` |
 | Minigraver 1,8 t | `1,8 t` eller `VTW-18` |
 | Minigraver 2,5 t | `2,5 t` eller `VTW-25` |
 | Minilaster 4WD | `Minilaster` |

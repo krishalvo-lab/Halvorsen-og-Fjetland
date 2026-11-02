@@ -18,7 +18,6 @@ OSLO = ZoneInfo("Europe/Oslo")
 
 # Rekkefølgen betyr noe: mest spesifikke treff først.
 MASKINER = [
-    ("vtw12s", ["vtw-12", "vtw12", "1,2 t", "1.2 t", "1,2t", "1.2t", "1,2 tonn"]),
     ("vtw18", ["vtw-18", "vtw18", "1,8 t", "1.8 t", "1,8t", "1.8t", "1,8 tonn"]),
     ("vtw25", ["vtw-25", "vtw25", "2,5 t", "2.5 t", "2,5t", "2.5t", "2,5 tonn"]),
     ("vth480z", ["vth-480", "vth480", "minilaster", "skid steer", "laster"]),
