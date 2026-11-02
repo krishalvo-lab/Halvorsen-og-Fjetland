@@ -464,10 +464,18 @@ function render() {
 $('#prev').addEventListener('click', () => { state.mo--; if (state.mo < 0) { state.mo = 11; state.y--; } render(); });
 $('#next').addEventListener('click', () => { state.mo++; if (state.mo > 11) { state.mo = 0; state.y++; } render(); });
 
-fetch('bookinger.json', { cache: 'no-store' })
-  .then(r => r.ok ? r.json() : {})
-  .then(j => { bookinger = j || {}; render(); })
-  .catch(() => render());
+// Ledighet i sanntid fra admin-siden; bookinger.json (oppdateres av GitHub hvert 30. min) er reserve
+async function hentLedighet() {
+  for (const url of ['https://admin.halvorsenogfjetland.no/ledighet.php', 'bookinger.json']) {
+    try {
+      const r = await fetch(url, { cache: 'no-store' });
+      if (r.ok) { const j = await r.json(); if (j && typeof j === 'object' && Object.keys(j).length) { bookinger = j; render(); return; } }
+    } catch (e) {}
+  }
+  render();
+}
+hentLedighet();
+setInterval(hentLedighet, 60000);
 render();
 
 // Skjema – sendes til webhotellet, som videresender til post@
