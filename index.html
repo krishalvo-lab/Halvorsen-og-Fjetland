@@ -315,9 +315,10 @@ footer .left{display:flex;align-items:center;gap:12px}
 <label>E-post<input type="email" name="epost" autocomplete="email"></label>
 <div class="hp" aria-hidden="true"><label>Nettside<input type="text" name="nettside" tabindex="-1" autocomplete="off"></label></div>
 <input type="hidden" name="ts" id="f-ts">
-<div class="row">
 <label>Maskin<select name="maskin" id="f-maskin"></select></label>
-<label>Ønsket dato<input type="date" name="dato" id="f-dato"></label>
+<div class="row">
+<label>Fra dato<input type="date" name="dato" id="f-dato"></label>
+<label>Til dato <span style="font-weight:400;opacity:.65">(valgfritt)</span><input type="date" name="til" id="f-til"></label>
 </div>
 <label>Hva skal gjøres?<textarea name="melding" rows="4"></textarea></label>
 <button class="btn btn-yellow" type="submit" id="f-send">Send forespørsel</button>
@@ -400,7 +401,8 @@ MASKINER.forEach((m, i) => {
 const fm = $('#f-maskin');
 MASKINER.forEach(m => { const o = document.createElement('option'); o.value = m.navn; o.textContent = m.navn; fm.appendChild(o); });
 const o = document.createElement('option'); o.value = 'Vet ikke – gi meg råd'; o.textContent = 'Vet ikke – gi meg råd'; fm.appendChild(o);
-$('#f-dato').min = iso(now);
+$('#f-dato').min = iso(now); $('#f-til').min = iso(now);
+$('#f-dato').addEventListener('change', e => { const t = $('#f-til'); t.min = e.target.value || iso(now); if (t.value && t.value < t.min) t.value = ''; });
 
 // Kalender
 function isBusy(mId, key) { return (bookinger[mId] || []).includes(key); }
@@ -497,7 +499,7 @@ $('#form').addEventListener('submit', async (e) => {
   } catch (err) {
     // Reserve: åpne e-postprogrammet med forespørselen ferdig utfylt
     const body = 'Navn: ' + f.get('navn') + '\nTelefon: ' + (f.get('telefon') || '') + '\nE-post: ' + (f.get('epost') || '') +
-      '\nMaskin: ' + f.get('maskin') + '\nØnsket dato: ' + (f.get('dato') || 'ikke valgt') + '\n\n' + (f.get('melding') || '');
+      '\nMaskin: ' + f.get('maskin') + '\nØnsket dato: ' + (f.get('dato') || 'ikke valgt') + (f.get('til') ? ' – ' + f.get('til') : '') + '\n\n' + (f.get('melding') || '');
     location.href = 'mailto:' + KONTAKT.epost + '?subject=' + encodeURIComponent('Leieforespørsel – ' + f.get('maskin')) + '&body=' + encodeURIComponent(body);
     st.textContent = (err.message && err.message !== 'feil' && err.message !== 'Failed to fetch' ? err.message + ' ' : '') + 'Vi åpnet e-postprogrammet ditt med forespørselen – trykk Send der.';
   }
