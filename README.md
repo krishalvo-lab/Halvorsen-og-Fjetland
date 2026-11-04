@@ -5,7 +5,7 @@ Statisk nettside for maskinutleie, publisert med GitHub Pages.
 ## Endre innhold
 
 - **Telefon, e-post og maskiner:** øverst i `<script>` nederst i `index.html` (`KONTAKT` og `MASKINER`).
-- **Priser, adresse:** søk etter `[PRIS]` og `[ADRESSE]` i `index.html`.
+- **Priser:** søk etter `[PRIS]` i `index.html`.
 - **Opptatte dager** hentes automatisk fra Google-kalenderen «H&F booking» hvert 30. minutt
   (se under). `bookinger.json` skal ikke redigeres for hånd.
 
