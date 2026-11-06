@@ -65,7 +65,9 @@ nav{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between
 .head p{margin:0;font-size:17px;color:var(--muted);max-width:460px;line-height:1.5}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px}
 .card{background:#fff;border:1px solid var(--line);border-radius:4px;display:flex;flex-direction:column;overflow:hidden}
-.card .ph{aspect-ratio:4/3}
+.card .ph{aspect-ratio:1/1}
+.ph-img{display:block;width:100%;height:auto;object-fit:cover;border-radius:4px;background:var(--steel)}
+.card .ph-img{aspect-ratio:1/1;border-radius:0}
 .card-body{padding:24px;display:flex;flex-direction:column;gap:12px;flex-grow:1}
 .model{margin:0;font-size:12px;font-weight:600;letter-spacing:.16em;color:var(--muted)}
 .card h3{margin:0;font-family:Archivo,sans-serif;font-weight:800;font-stretch:112%;font-size:22px}
@@ -207,7 +209,7 @@ footer .left{display:flex;align-items:center;gap:12px}
 </div>
 </div>
 <div class="hero-visual">
-<div class="ph">Bilde av maskinparken kommer</div>
+<img class="ph-img" src="bilder/hero.jpg" width="1200" height="960" alt="Minigraver med hytte, klar for utleie" fetchpriority="high">
 <div class="tag">DAG · HELG · LEVERING</div>
 </div>
 </section>
@@ -358,16 +360,16 @@ const KONTAKT = {
 };
 
 const MASKINER = [
-  { id: 'vtw18', navn: 'Minigraver 1,8 t', modell: 'VOTE VTW-18',
+  { id: 'vtw18', bilde: true, navn: 'Minigraver 1,8 t', modell: 'VOTE VTW-18',
     tekst: '<strong>Arbeidshesten.</strong> Grøft, kabel, drenering og fundament. Har hytte, så regnet blir ingen unnskyldning.',
     specs: [['Vekt', '1,8 tonn'], ['Motor', 'Laidong diesel'], ['Førerplass', 'Hytte'], ['Betjening', 'Servostyrt, sideswing, utvidbart understell']] },
-  { id: 'vtw25', navn: 'Minigraver 2,5 t', modell: 'VOTE VTW-25',
+  { id: 'vtw25', bilde: true, navn: 'Minigraver 2,5 t', modell: 'VOTE VTW-25',
     tekst: '<strong>Den store broren.</strong> Når 1,8-eren ikke rekker til: mer masse, dypere grøfter, lengre dager.',
     specs: [['Vekt', '2,5 tonn'], ['Motor', 'Kubota D1105 diesel'], ['Førerplass', 'Hytte'], ['Betjening', 'Servostyrt, sideswing, utvidbart understell']] },
-  { id: 'vth480z', navn: 'Minilaster 4WD', modell: 'VOTE VTH-480Z',
+  { id: 'vth480z', bilde: true, navn: 'Minilaster 4WD', modell: 'VOTE VTH-480Z',
     tekst: '<strong>Flytter alt.</strong> Grus, jord og paller. Monter snøfreseren, så er vinteren løst.',
     specs: [['Drift', 'Firehjulstrekk, luftgummihjul'], ['Motor', 'Koop diesel, elstart'], ['Redskap', 'Skuffe, pallegaffel, snøfreser']] },
-  { id: 'vtys50a', navn: 'Beltedumper 500 kg', modell: 'VOTE VT-YS50A',
+  { id: 'vtys50a', bilde: true, navn: 'Beltedumper 500 kg', modell: 'VOTE VT-YS50A',
     tekst: '<strong>Trillebår på steroider.</strong> 500 kg over myr og bratt terreng, og den tipper rett i hengeren.',
     specs: [['Last', '500 kg'], ['Motor', 'Koop diesel, elstart'], ['Drift', 'Gummibelter, to hastigheter'], ['Tipp', 'Hydraulisk løft og tipp']] },
   { id: 'vtgc500', navn: 'RC beitepusser', modell: 'VOTE VT-GC500',
@@ -394,7 +396,7 @@ MASKINER.forEach((m, i) => {
   const el = document.createElement('article');
   el.className = 'card';
   el.innerHTML =
-    '<div class="ph">Bilde kommer</div>' +
+    (m.bilde ? '<img class="ph-img" src="bilder/' + m.id + '.jpg" width="800" alt="' + m.navn + '" loading="lazy">' : '<div class="ph">Bilde kommer</div>') +
     '<div class="card-body">' +
     '<p class="model">' + m.modell + '</p>' +
     '<h3>' + m.navn + '</h3>' +
