@@ -30,5 +30,5 @@ Kjør manuelt under Actions → «Synk bookinger fra kalender» → Run workflow
 
 ## Før lansering
 
-- Fyll inn alle `[...]`-plassholdere og legg inn bilder.
+- Fyll inn alle `[...]`-plassholdere (`[PRIS]`, `[LAGRINGSTID]` i personvernerklæringen) og legg inn bilder.
 - Fjern `<meta name="robots" content="noindex">` i `index.html` så Google finner siden.
