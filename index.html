@@ -159,6 +159,14 @@ form .btn{align-self:flex-start}
 .mail-btn{align-self:flex-start;font-size:18px;min-height:56px;padding:0 26px;word-break:break-all}
 .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
 .form-intro{margin:0;color:#C9CDD2;font-size:15px}
+.form-note{margin:0;color:#C9CDD2;font-size:14px;line-height:1.5}
+.form-note a{color:var(--ground)}
+.legal{background:var(--sand)}
+.legal .block{gap:20px;padding-top:72px;padding-bottom:72px}
+.legal h2{font-size:clamp(26px,3vw,34px)}
+.legal h3{margin:12px 0 0;font-size:16px}
+.legal p{margin:0;max-width:720px;font-size:15px;line-height:1.6;color:var(--body)}
+footer a{color:var(--ground)}
 
 footer{background:var(--ink);color:#A9AEB5;border-top:1px solid #33373D}
 footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:16px;padding-top:28px;padding-bottom:28px;font-size:14px}
@@ -336,7 +344,27 @@ footer .left{display:flex;align-items:center;gap:12px}
 </div>
 <label>Hva skal gjøres?<textarea name="melding" rows="4"></textarea></label>
 <button class="btn btn-yellow" type="submit" id="f-send">Send forespørsel</button>
+<p class="form-note">Vi bruker opplysningene til å svare deg og avtale leie. Les <a href="#personvern">personvernerklæringen</a>.</p>
 </form>
+</div>
+</section>
+
+<section id="personvern" class="legal" aria-labelledby="personvern-tittel">
+<div class="wrap block">
+<h2 class="display" id="personvern-tittel">Personvern</h2>
+<p>Halvorsen og Fjetland AS (org.nr. 938 423 415) er ansvarlig for opplysningene vi har om deg. Spørsmål om personvern sender du til <a href="mailto:post@halvorsenogfjetland.no">post@halvorsenogfjetland.no</a>.</p>
+<h3>Hva vi lagrer</h3>
+<p>Når du sender en forespørsel: navn, telefon, e-post, maskin, datoer og det du skriver. Når du leier: i tillegg fødselsdato, adresse, signatur, bilder av maskinen ved utlevering og retur, og tidspunkt, IP-adresse og enhet for signeringen.</p>
+<h3>Hvorfor</h3>
+<p>For å svare deg og for å inngå og gjennomføre leieavtalen (personvernforordningen art. 6 nr. 1 b). Regnskapsmateriale lagrer vi fordi loven krever det (art. 6 nr. 1 c). Det er frivillig å gi oss opplysningene, men uten dem kan vi ikke svare eller leie ut.</p>
+<h3>Hvem som får dem</h3>
+<p>Bare vi to som driver selskapet, og leverandørene vi bruker til webhotell, e-post, kalender og dokumentlagring (domene.no og Google). Google kan behandle opplysninger utenfor EØS. Vi selger ikke opplysninger og bruker dem ikke til reklame.</p>
+<h3>Hvor lenge</h3>
+<p>Forespørsler som ikke fører til leie, sletter vi etter [LAGRINGSTID]. Leieavtaler og fakturagrunnlag lagrer vi så lenge regnskapsreglene krever.</p>
+<h3>Dine rettigheter</h3>
+<p>Du kan be om innsyn, retting, sletting, begrensning og utlevering av opplysningene dine, og du kan protestere mot behandlingen. Send en e-post til oss. Du kan også klage til <a href="https://www.datatilsynet.no" target="_blank" rel="noopener">Datatilsynet</a>.</p>
+<h3>Nettsiden</h3>
+<p>Siden bruker ikke informasjonskapsler. Skrifttypene hentes fra Google Fonts, så Google ser IP-adressen din når siden lastes. Når du sender skjemaet, bruker vi IP-adressen i inntil en time for å stoppe spam.</p>
 </div>
 </section>
 
@@ -348,7 +376,7 @@ footer .left{display:flex;align-items:center;gap:12px}
 <svg width="40" height="25" viewBox="0 0 64 40" aria-hidden="true"><rect x="1.5" y="1.5" width="61" height="37" rx="18.5" fill="none" stroke="#F5B800" stroke-width="3" stroke-dasharray="3.2 2.6"/><rect x="6" y="6" width="52" height="28" rx="14" fill="#F5B800"/><text x="32" y="25.2" text-anchor="middle" font-family="Archivo, Arial Black, sans-serif" font-weight="900" font-size="14" style="font-stretch:125%" fill="#17191C">H&amp;F</text></svg>
 <span>Halvorsen og Fjetland AS · Org.nr. 938 423 415</span>
 </div>
-<span>Maskinutleie på Haugalandet</span>
+<span>Maskinutleie på Haugalandet · <a href="#personvern">Personvern</a></span>
 </div>
 </footer>
 
