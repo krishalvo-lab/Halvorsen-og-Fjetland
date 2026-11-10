@@ -27,14 +27,23 @@ jobs:
           GCAL_ICS_URL: ${{ secrets.GCAL_ICS_URL }}
         run: python scripts/sync_bookinger.py
 
+      - name: Hent prisliste (reserve hvis admin er nede)
+        run: |
+          if curl -fsS --max-time 20 https://admin.halvorsenogfjetland.no/priser.php -o ny.json && python -c "import json; assert 'maskiner' in json.load(open('ny.json'))"; then
+            python -c "import json; json.dump(json.load(open('ny.json')), open('priser.json', 'w'), ensure_ascii=False, indent=1, sort_keys=True)"
+          else
+            echo "Fikk ikke hentet prislista – beholder priser.json."
+          fi
+          rm -f ny.json
+
       - name: Lagre endringer
         run: |
-          if git diff --quiet bookinger.json; then
+          if git diff --quiet bookinger.json priser.json; then
             echo "Ingen endringer."
             exit 0
           fi
           git config user.name "booking-sync"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add bookinger.json
-          git commit -m "Oppdater ledighet fra kalender"
+          git add bookinger.json priser.json
+          git commit -m "Oppdater ledighet og priser"
           git push
