@@ -119,14 +119,16 @@ nav{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between
 
 /* prices */
 .prices{background:var(--sand)}
-.pgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px}
-.pcard{background:#fff;border-radius:4px;padding:32px;display:flex;flex-direction:column;gap:10px}
-.pcard.dark{background:var(--ink);color:var(--ground)}
-.pcard .eyebrow{letter-spacing:.18em}
-.pcard.dark .eyebrow{color:var(--yellow)}
-.pcard .amount{font-size:40px}
-.pcard p.sub{margin:0;font-size:15px;line-height:1.5;color:var(--body)}
-.pcard.dark p.sub{color:#C9CDD2}
+.ptable{width:100%;border-collapse:collapse;background:#fff;border-radius:4px;overflow:hidden}
+.ptable th,.ptable td{padding:16px 20px;text-align:right;border-bottom:1px solid var(--line);font-size:16px}
+.ptable th:first-child,.ptable td:first-child{text-align:left;width:50%}
+.ptable thead th{background:var(--ink);color:var(--yellow);font-family:Archivo,sans-serif;font-size:13px;letter-spacing:.18em;font-weight:700}
+.ptable tbody tr:last-child td{border-bottom:0}
+.ptable td.kr{font-family:Archivo,sans-serif;font-weight:800;font-size:18px;white-space:nowrap}
+.ptable td.kr.ask{font-family:inherit;font-weight:400;font-size:15px;color:var(--muted);white-space:normal}
+.ptable td span{display:block;font-size:13px;color:var(--muted)}
+.pnote{margin:20px 0 10px;font-size:17px;line-height:1.5;color:var(--body);max-width:60ch}
+@media(max-width:520px){.ptable th,.ptable td{padding:12px 10px;font-size:15px}.ptable td.kr{font-size:16px}}
 .fine{margin:0;font-size:14px;color:var(--muted)}
 
 /* steps */
@@ -288,12 +290,12 @@ footer .left{display:flex;align-items:center;gap:12px}
 <section id="priser" class="prices">
 <div class="wrap block">
 <h2 class="display">Hva det koster</h2>
-<div class="pgrid">
-<div class="pcard"><p class="eyebrow">DAGSLEIE</p><p class="display amount">[PRIS] kr</p><p class="sub">Hent om morgenen, lever på kvelden.</p></div>
-<div class="pcard dark"><p class="eyebrow">HELGELEIE</p><p class="display amount">[PRIS] kr</p><p class="sub">Fredag ettermiddag til mandag morgen.</p></div>
-<div class="pcard"><p class="eyebrow">LEVERING</p><p class="display amount">[PRIS] kr</p><p class="sub">Per tur med henger, levert og hentet på tomta.</p></div>
-</div>
-<p class="fine">Ingen skjulte gebyrer. Du betaler for maskinen, og for diesel hvis du ikke fyller. Alle priser eks. mva. Ekstra redskap leies i tillegg.</p>
+<table class="ptable" id="pwrap" hidden>
+<thead><tr><th scope="col">MASKIN</th><th scope="col">DAG</th><th scope="col">HELG</th></tr></thead>
+<tbody id="ptable"></tbody>
+</table>
+<p class="pnote"><span id="p-veil"></span> <a href="#kontakt">Ta kontakt</a>, så får du en pris.</p>
+<p class="fine">Dag: hent om morgenen, lever på kvelden. Helg: fredag ettermiddag til mandag morgen.<span id="p-lev"></span> Du betaler for maskinen, og for diesel hvis du ikke fyller.</p>
 </div>
 </section>
 
@@ -430,7 +432,7 @@ MASKINER.forEach((m, i) => {
     '<h3>' + m.navn + '</h3>' +
     '<p class="desc">' + m.tekst + '</p>' +
     '<ul class="specs">' + m.specs.map(s => '<li>' + s[0] + ': <b>' + s[1] + '</b></li>').join('') + '</ul>' +
-    '<div class="card-actions"><p class="price">fra [PRIS] kr/dag</p><button type="button">Se ledighet</button></div>' +
+    '<div class="card-actions"><p class="price" data-pris="' + m.id + '"></p><button type="button">Se ledighet</button></div>' +
     '</div>';
   el.querySelector('button').addEventListener('click', () => {
     state.m = i; state.sel = null; render();
@@ -438,6 +440,35 @@ MASKINER.forEach((m, i) => {
   });
   grid.appendChild(el);
 });
+
+// Veiledende priser fra prislista i admin; priser.json (oppdateres av GitHub hvert 30. min) er reserve
+const kr = (v) => Math.round(v).toLocaleString('nb-NO') + ' kr';
+function visPriser(p) {
+  const pm = (p && p.maskiner) || {};
+  $('#ptable').innerHTML = MASKINER.map(m => {
+    const x = pm[m.id] || {};
+    const celle = (v) => v == null ? '<td class="kr ask">Ta kontakt</td>' : '<td class="kr">' + kr(v) + '</td>';
+    return '<tr><td>' + m.navn + '<span>' + m.modell + '</span></td>' + celle(x.dogn) + celle(x.helg) + '</tr>';
+  }).join('');
+  document.querySelectorAll('[data-pris]').forEach(el => {
+    const v = (pm[el.dataset.pris] || {}).dogn;
+    el.textContent = v == null ? 'Pris på forespørsel' : 'fra ' + kr(v) + '/dag';
+  });
+  const noen = Object.values(pm).some(x => x && (x.dogn != null || x.helg != null));
+  $('#pwrap').hidden = !noen;
+  $('#p-veil').textContent = noen ? 'Prisene er veiledende og ' + (p.mva_inkl ? 'inkl.' : 'eks.') + ' mva. Skal du leie lenger, eller trenger du ekstra redskap?' : 'Prislista kommer.';
+  $('#p-lev').textContent = p && p.levering != null ? ' Levering: ' + kr(p.levering) + ' per tur, levert og hentet på tomta.' : '';
+}
+async function hentPriser() {
+  for (const url of ['https://admin.halvorsenogfjetland.no/priser.php', 'priser.json']) {
+    try {
+      const r = await fetch(url, { cache: 'no-store' });
+      if (r.ok) { const j = await r.json(); if (j && j.maskiner) { visPriser(j); return; } }
+    } catch (e) {}
+  }
+}
+visPriser(null);
+hentPriser();
 
 // Skjema: maskinvalg
 const fm = $('#f-maskin');

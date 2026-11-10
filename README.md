@@ -5,7 +5,7 @@ Statisk nettside for maskinutleie, publisert med GitHub Pages.
 ## Endre innhold
 
 - **Telefon, e-post og maskiner:** øverst i `<script>` nederst i `index.html` (`KONTAKT` og `MASKINER`).
-- **Priser:** søk etter `[PRIS]` i `index.html`.
+- **Priser:** legges inn i admin (Innstillinger → Prisliste) og vises på siden med en gang. `priser.json` er reserve og oppdateres automatisk.
 - **Opptatte dager** hentes automatisk fra Google-kalenderen «H&F booking» hvert 30. minutt
   (se under). `bookinger.json` skal ikke redigeres for hånd.
 
@@ -27,8 +27,3 @@ Bare maskin og dato publiseres – aldri navn eller detaljer.
 Oppsett (én gang): Settings → Secrets and variables → Actions → New repository secret,
 navn `GCAL_ICS_URL`, verdi = «Hemmelig adresse i iCal-format» fra kalenderens innstillinger.
 Kjør manuelt under Actions → «Synk bookinger fra kalender» → Run workflow.
-
-## Før lansering
-
-- Fyll inn alle `[...]`-plassholdere (`[PRIS]`) og legg inn bilder.
-- Fjern `<meta name="robots" content="noindex">` i `index.html` så Google finner siden.
