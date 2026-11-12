@@ -1,24 +1,24 @@
 {
- "levering": 69,
+ "levering": 0,
  "maskiner": {
   "vtgc500": {
-   "dogn": 69,
+   "dogn": 0,
    "helg": null
   },
   "vth480z": {
-   "dogn": 69,
+   "dogn": 0,
    "helg": null
   },
   "vtw18": {
-   "dogn": 69,
+   "dogn": 0,
    "helg": null
   },
   "vtw25": {
-   "dogn": 69,
+   "dogn": 0,
    "helg": null
   },
   "vtys50a": {
-   "dogn": 69,
+   "dogn": 0,
    "helg": null
   }
  },
