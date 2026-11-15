@@ -1,4 +1,6 @@
-name: Synk bookinger fra kalender
+# Reservekopi av ledighet og priser. Nettsiden henter begge direkte fra admin;
+# bookinger.json og priser.json brukes bare hvis admin ikke svarer.
+name: Synk ledighet og priser fra admin
 
 on:
   schedule:
@@ -18,23 +20,18 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-
-      - name: Hent kalender
-        env:
-          GCAL_ICS_URL: ${{ secrets.GCAL_ICS_URL }}
-        run: python scripts/sync_bookinger.py
-
-      - name: Hent prisliste (reserve hvis admin er nede)
+      - name: Hent ledighet og priser (beholder forrige kopi hvis admin er nede)
         run: |
-          if curl -fsS --max-time 20 https://admin.halvorsenogfjetland.no/priser.php -o ny.json && python -c "import json; assert 'maskiner' in json.load(open('ny.json'))"; then
-            python -c "import json; json.dump(json.load(open('ny.json')), open('priser.json', 'w'), ensure_ascii=False, indent=1, sort_keys=True)"
-          else
-            echo "Fikk ikke hentet prislista – beholder priser.json."
-          fi
-          rm -f ny.json
+          hent() { # hent <adresse> <fil> <innrykk> <python-sjekk av d>
+            if curl -fsS --max-time 20 "$1" -o ny.json && python3 -c "import json; d = json.load(open('ny.json')); assert $4"; then
+              python3 -c "import json; f = open('$2', 'w', encoding='utf-8'); json.dump(json.load(open('ny.json')), f, ensure_ascii=False, indent=$3, sort_keys=$5); f.write('\n')"
+            else
+              echo "Fikk ikke hentet $1 – beholder $2."
+            fi
+            rm -f ny.json
+          }
+          hent https://admin.halvorsenogfjetland.no/ledighet.php bookinger.json 2 "isinstance(d, dict) and d and all(isinstance(v, list) for v in d.values())" False
+          hent https://admin.halvorsenogfjetland.no/priser.php priser.json 1 "'maskiner' in d" True
 
       - name: Lagre endringer
         run: |
