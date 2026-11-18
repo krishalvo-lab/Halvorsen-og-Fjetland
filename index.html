@@ -20,7 +20,6 @@ a{color:var(--ink)}
 .wrap{max-width:1200px;margin:0 auto;padding:0 24px}
 .display{font-family:Archivo,sans-serif;font-weight:900;font-stretch:112%;line-height:1;margin:0}
 h2.display{font-size:clamp(34px,4vw,52px)}
-.eyebrow{margin:0;font-size:13px;font-weight:600;letter-spacing:.2em;color:var(--muted)}
 .btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 24px;border-radius:3px;font-weight:600;font-size:16px;text-decoration:none;border:2px solid var(--ink);cursor:pointer;font-family:inherit}
 .btn-dark{background:var(--ink);color:var(--ground)}
 .btn-dark:hover{background:#000;color:#fff}
@@ -43,16 +42,13 @@ nav{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between
 /* hero */
 .hero{display:flex;flex-wrap:wrap;gap:56px;align-items:center;padding-top:80px;padding-bottom:96px}
 .hero-text{flex:1 1 460px;min-width:0;display:flex;flex-direction:column;gap:28px}
-.hero h1{font-size:clamp(44px,6.4vw,84px);line-height:.96;letter-spacing:-.01em}
-.hero h1 span{background:var(--yellow);padding:0 10px;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.hero h1{font-size:clamp(40px,5.2vw,64px);line-height:1.02;letter-spacing:-.01em}
 .lead{margin:0;font-size:19px;line-height:1.55;color:var(--body);max-width:540px}
 .notice{margin:0;max-width:540px;padding:12px 16px;background:var(--yellow);color:var(--ink);font-size:16px;line-height:1.5;border-left:4px solid var(--ink)}
-.contact .notice{margin:0 0 16px}
 .cta{display:flex;flex-wrap:wrap;gap:12px}
-.hero-visual{flex:1 1 440px;min-width:0;position:relative}
+.hero-visual{flex:1 1 440px;min-width:0}
 .ph{background:#E7E3DA;color:var(--muted);display:flex;align-items:center;justify-content:center;font-size:14px;text-align:center;padding:16px}
 .hero-visual .ph{aspect-ratio:5/4;background:var(--steel);color:#A9AEB5;border-radius:4px}
-.tag{position:absolute;left:-12px;bottom:-20px;background:var(--yellow);padding:14px 18px;border-radius:3px;font-family:Archivo,sans-serif;font-weight:800;font-stretch:115%;font-size:15px;letter-spacing:.02em}
 
 /* strip */
 .strip{background:var(--ink);color:var(--ground)}
@@ -135,7 +131,6 @@ nav{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between
 .steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:32px}
 .steps li{display:flex;flex-direction:column;gap:12px;border-top:3px solid var(--ink);padding-top:20px}
 .steps li.hl{border-top-color:var(--yellow)}
-.steps .n{font-family:Archivo,sans-serif;font-weight:900;font-stretch:125%;font-size:36px}
 .steps h3{margin:0;font-size:19px;font-weight:600}
 .steps p{margin:0;font-size:15px;line-height:1.55;color:var(--body)}
 
@@ -197,10 +192,10 @@ footer .left{display:flex;align-items:center;gap:12px}
 </a>
 <div class="links">
 <a href="#maskiner">Maskiner</a>
-<a href="#ledighet">Ledighet</a>
+<a id="nav-ledighet" href="#ledighet" hidden>Ledighet</a>
 <a href="#priser">Priser</a>
 <a href="#slik">Slik leier du</a>
-<a class="btn btn-dark" href="#kontakt">Book maskin</a>
+<a class="btn btn-dark" href="#kontakt">Send forespørsel</a>
 </div>
 </nav>
 </header>
@@ -209,18 +204,16 @@ footer .left{display:flex;align-items:center;gap:12px}
 
 <section class="wrap hero">
 <div class="hero-text">
-<p class="eyebrow">MINIMASKINER TIL LEIE · HAUGALANDET</p>
-<h1 class="display">Små maskiner.<br><span>Store jobber.</span></h1>
-<p class="lead">Minigravere, laster, dumper og beitepusser til leie på Raglamyr. Vi leverer maskinen. Grøfta graver du selv.</p>
-<p class="notice"><strong>Vi åpner for utleie på nyåret.</strong> Send forespørsel, så gir vi beskjed så snart vi har en startdato. Trenger du noe i mellomtiden, kan du se hos <a href="https://raglamyrutleie.no/" target="_blank" rel="noopener">Raglamyr Utleie</a>.</p>
+<h1 class="display">Lei minigraver på Raglamyr</h1>
+<p class="lead">Vi leier ut minigravere, minilaster, beltedumper og beitepusser. Hent på Raglamyr, eller avtal levering med oss.</p>
+<p class="notice" id="oppstart"><strong id="oppstart-tittel">Planlagt oppstart i 2027.</strong> <span id="oppstart-tekst">Send oss gjerne en forespørsel med datoene du ønsker. Vi gir beskjed når oppstarten er avklart.</span></p>
 <div class="cta">
 <a class="btn btn-dark" href="#maskiner">Se maskinene</a>
-<a class="btn btn-line" href="#ledighet">Sjekk ledige datoer</a>
+<a class="btn btn-line" href="#kontakt">Send forespørsel</a>
 </div>
 </div>
 <div class="hero-visual">
-<img class="ph-img" src="bilder/hero.jpg" width="1200" height="960" alt="Minigraver med hytte, klar for utleie" fetchpriority="high">
-<div class="tag">DAG · HELG · LEVERING</div>
+<img class="ph-img" src="bilder/hero.jpg" width="1200" height="960" alt="Gul minigraver med hytte" fetchpriority="high">
 </div>
 </section>
 
@@ -235,7 +228,7 @@ footer .left{display:flex;align-items:center;gap:12px}
 <section id="maskiner" class="wrap block">
 <div class="head">
 <h2 class="display">Maskinparken</h2>
-<p>Fem maskiner som gjør helgeprosjektet ferdig før søndag middag. Gravemaskinene leveres med hurtigkobling og skuffer.</p>
+<p>Si fra hva du skal gjøre, så sender vi med riktig redskap.</p>
 </div>
 <div class="grid" id="machine-grid"></div>
 </section>
@@ -256,16 +249,16 @@ footer .left{display:flex;align-items:center;gap:12px}
 <li>Pallegaffel</li>
 <li>Snøfreser</li>
 </ul>
-<p class="note">Si fra hva du skal gjøre, så sender vi med riktig redskap.</p>
+<p class="note">Gravemaskinene leveres med hurtigkobling og skuffer.</p>
 </div>
 </section>
 
-<section id="ledighet" class="cal-sec">
+<section id="ledighet" class="cal-sec" hidden>
 <div class="wrap block">
 <div class="cal-layout">
 <div class="cal-side">
 <h2 class="display">Ledige dager</h2>
-<p>Velg maskin og trykk på en ledig dag, så lager vi e-posten til oss ferdig utfylt.</p>
+<p>Velg maskin og dato for å sende en leieforespørsel. Vi bekrefter leien når vi svarer deg.</p>
 <div class="mlist" id="mlist" role="group" aria-label="Velg maskin"></div>
 <div class="legend">
 <span><i class="sw sw-free"></i>Ledig</span>
@@ -289,29 +282,30 @@ footer .left{display:flex;align-items:center;gap:12px}
 
 <section id="priser" class="prices">
 <div class="wrap block">
-<h2 class="display">Hva det koster</h2>
+<h2 class="display">Priser</h2>
 <table class="ptable" id="pwrap" hidden>
 <thead><tr><th scope="col">MASKIN</th><th scope="col">DAG</th><th scope="col">HELG</th></tr></thead>
 <tbody id="ptable"></tbody>
 </table>
 <p class="pnote"><span id="p-veil"></span> <a href="#kontakt">Ta kontakt</a>, så får du en pris.</p>
-<p class="fine">Dag: hent om morgenen, lever på kvelden. Helg: fredag ettermiddag til mandag morgen.<span id="p-lev"></span> Du betaler for maskinen, og for diesel hvis du ikke fyller.</p>
+<p class="fine">Ved dagsleie henter du om morgenen og leverer om kvelden. Helgeleie går fra fredag ettermiddag til mandag morgen. Lever maskinen med full tank, ellers tar vi betalt for dieselen som mangler.</p>
+<p class="fine" id="p-lev">Oppgi adressen hvis du ønsker levering. Vi avtaler pris for levering og henting.</p>
 </div>
 </section>
 
 <section id="slik" class="wrap block">
 <h2 class="display">Slik leier du</h2>
 <ol class="steps">
-<li><span class="n">01</span><h3>Si fra</h3><p><a href="#kontakt">Skjema</a> eller <a href="mailto:post@halvorsenogfjetland.no">e-post</a>: hvilken maskin, når og hva som skal gjøres.</p></li>
-<li><span class="n">02</span><h3>Hent eller få levert</h3><p>Vi viser deg maskinen. Ta med legitimasjon.</p></li>
-<li class="hl"><span class="n">03</span><h3>Ring før du graver</h3><p>Meld fra på <a href="https://gravemelding.no" target="_blank" rel="noopener">gravemelding.no</a>. Den kabelen du treffer, betaler du.</p></li>
-<li><span class="n">04</span><h3>Lever tilbake</h3><p>Rengjort og fylt opp, til avtalt tid. Ferdig.</p></li>
+<li><h3>Send en forespørsel</h3><p><a href="#kontakt">Send oss ønsket leieperiode</a> og fortell hva du skal gjøre. Vi svarer med pris og tilgjengelighet.</p></li>
+<li><h3>Hent eller få levert</h3><p>Vi viser deg maskinen. Ta med legitimasjon.</p></li>
+<li class="hl"><h3>Sjekk før du graver</h3><p>Sjekk om det ligger kabler der du skal grave. Du kan sende gravemelding på <a href="https://gravemelding.no" target="_blank" rel="noopener">gravemelding.no</a>.</p></li>
+<li><h3>Lever tilbake</h3><p>Lever maskinen til avtalt tid, rengjort og med full tank.</p></li>
 </ol>
 </section>
 
 <section id="annet-utleie" class="wrap block">
 <div class="head">
-<h2 class="display">Trenger du mer?</h2>
+<h2 class="display">Annet utstyr hos Raglamyr Utleie</h2>
 <p>Raglamyr Utleie leier ut tilhengere (tipphenger, skaphenger og vanlig henger), stillas, gipsheis, blandere, jordbor, avfukter og vifter i Haugesund og på Karmøy.</p>
 </div>
 <div class="cta"><a class="btn btn-line" href="https://raglamyrutleie.no/" target="_blank" rel="noopener">Se Raglamyr Utleie</a></div>
@@ -320,8 +314,7 @@ footer .left{display:flex;align-items:center;gap:12px}
 <section id="kontakt" class="contact">
 <div class="wrap contact-layout">
 <div class="contact-info">
-<h2 class="display">Klar til å grave?</h2>
-<p class="lead">Send en melding, så svarer vi.</p>
+<h2 class="display">Spør oss om leie</h2>
 <a class="btn btn-yellow mail-btn" href="mailto:post@halvorsenogfjetland.no?subject=Leieforesp%C3%B8rsel">post@halvorsenogfjetland.no</a>
 <div class="facts">
 <div id="row-phone" hidden><small>TELEFON</small><span id="c-phone"></span></div>
@@ -329,8 +322,7 @@ footer .left{display:flex;align-items:center;gap:12px}
 </div>
 </div>
 <form id="form" novalidate>
-<p class="notice"><strong>Vi åpner for utleie på nyåret.</strong> Send forespørsel, så gir vi beskjed så snart vi har en startdato. Trenger du noe i mellomtiden, kan du se hos <a href="https://raglamyrutleie.no/" target="_blank" rel="noopener">Raglamyr Utleie</a>.</p>
-<p class="form-intro">Eller send forespørselen herfra – den går rett til innboksen vår:</p>
+<p class="form-intro">Velg maskin og legg inn ønsket leieperiode hvis du vet når du trenger den.</p>
 <p class="status" id="status" role="status" hidden></p>
 <div class="row">
 <label>Navn<input type="text" name="navn" autocomplete="name" required></label>
@@ -341,8 +333,8 @@ footer .left{display:flex;align-items:center;gap:12px}
 <input type="hidden" name="ts" id="f-ts">
 <label>Maskin<select name="maskin" id="f-maskin"></select></label>
 <div class="row">
-<label>Fra dato<input type="date" name="dato" id="f-dato"></label>
-<label>Til dato <span style="font-weight:400;opacity:.65">(valgfritt)</span><input type="date" name="til" id="f-til"></label>
+<label>Ønsket fra dato<input type="date" name="dato" id="f-dato"></label>
+<label>Ønsket til dato <span style="font-weight:400;opacity:.65">(valgfritt)</span><input type="date" name="til" id="f-til"></label>
 </div>
 <label>Hva skal gjøres?<textarea name="melding" rows="4"></textarea></label>
 <button class="btn btn-yellow" type="submit" id="f-send">Send forespørsel</button>
@@ -389,21 +381,24 @@ const KONTAKT = {
   epost: 'post@halvorsenogfjetland.no'  // forespørsler sendes hit via e-postprogrammet til kunden
 };
 
+// Sett bekreftet startdato som 'ÅÅÅÅ-MM-DD'. Kalenderen vises fra den dagen.
+const UTLEIE_START = null;
+
 const MASKINER = [
   { id: 'vtw18', bilde: true, navn: 'Minigraver 1,8 t', modell: 'VOTE VTW-18',
-    tekst: '<strong>Arbeidshesten.</strong> Grøft, kabel, drenering og fundament. Har hytte, så regnet blir ingen unnskyldning.',
+    tekst: 'Til mindre grøfter, drenering og arbeid der det er trangt.',
     specs: [['Vekt', '1,8 tonn'], ['Motor', 'Laidong diesel'], ['Førerplass', 'Hytte'], ['Betjening', 'Servostyrt, sideswing, utvidbart understell']] },
   { id: 'vtw25', bilde: true, navn: 'Minigraver 2,5 t', modell: 'VOTE VTW-25',
-    tekst: '<strong>Den store broren.</strong> Når 1,8-eren ikke rekker til: mer masse, dypere grøfter, lengre dager.',
+    tekst: 'Velg denne hvis du skal grave dypere eller flytte mer masse.',
     specs: [['Vekt', '2,5 tonn'], ['Motor', 'Kubota D1105 diesel'], ['Førerplass', 'Hytte'], ['Betjening', 'Servostyrt, sideswing, utvidbart understell']] },
   { id: 'vth480z', bilde: true, navn: 'Minilaster 4WD', modell: 'VOTE VTH-480Z',
-    tekst: '<strong>Flytter alt.</strong> Grus, jord og paller. Monter snøfreseren, så er vinteren løst.',
+    tekst: 'Bruk skuffa til jord og grus, pallegaffelen til paller eller snøfreseren til snørydding.',
     specs: [['Drift', 'Firehjulstrekk, luftgummihjul'], ['Motor', 'Koop diesel, elstart'], ['Redskap', 'Skuffe, pallegaffel, snøfreser']] },
   { id: 'vtys50a', bilde: true, navn: 'Beltedumper 500 kg', modell: 'VOTE VT-YS50A',
-    tekst: '<strong>Trillebår på steroider.</strong> 500 kg over myr og bratt terreng, og den tipper rett i hengeren.',
+    tekst: 'Frakter opptil 500 kg jord, grus eller stein om gangen.',
     specs: [['Last', '500 kg'], ['Motor', 'Koop diesel, elstart'], ['Drift', 'Gummibelter, to hastigheter'], ['Tipp', 'Hydraulisk løft og tipp']] },
-  { id: 'vtgc500', bilde: true, navn: 'RC beitepusser', modell: 'VOTE VT-GC500',
-    tekst: '<strong>Kratt-terminator.</strong> Fjernstyrt, på belter. Den tar skråningen, og du står med kaffekoppen.',
+  { id: 'vtgc500', bilde: true, navn: 'Fjernstyrt beitepusser', modell: 'VOTE VT-GC500',
+    tekst: 'Til høyt gress og kratt. Den går på belter og har 50 cm klippebredde.',
     specs: [['Klippebredde', '50 cm'], ['Motor', 'Rato bensin, elstart'], ['Drift', 'Gummibelter, fjernstyrt']] }
 ];
 // ---------------------------------------------------------------------------
@@ -415,7 +410,20 @@ const parseIso = (s) => { const [y, m, d] = s.split('-').map(Number); return new
 
 let bookinger = {};
 const now = new Date();
+const dagensDato = iso(now);
+const utleieAapen = UTLEIE_START !== null && dagensDato >= UTLEIE_START;
+const tidligsteLeiedato = UTLEIE_START && UTLEIE_START > dagensDato ? UTLEIE_START : dagensDato;
 const state = { m: 0, y: now.getFullYear(), mo: now.getMonth(), sel: null };
+
+if (utleieAapen) {
+  $('#oppstart').hidden = true;
+  $('#nav-ledighet').hidden = false;
+  $('#ledighet').hidden = false;
+} else if (UTLEIE_START) {
+  const startdato = parseIso(UTLEIE_START).toLocaleDateString('nb-NO', { day: 'numeric', month: 'long', year: 'numeric' });
+  $('#oppstart-tittel').textContent = 'Utleien åpner ' + startdato + '.';
+  $('#oppstart-tekst').textContent = 'Send oss gjerne en forespørsel med datoene du ønsker.';
+}
 
 // Kontaktinfo
 if (KONTAKT.telefon) { $('#c-phone').innerHTML = '<a href="tel:' + KONTAKT.telefon.replace(/\s/g, '') + '">' + KONTAKT.telefon + '</a>'; $('#row-phone').hidden = false; }
@@ -432,11 +440,17 @@ MASKINER.forEach((m, i) => {
     '<h3>' + m.navn + '</h3>' +
     '<p class="desc">' + m.tekst + '</p>' +
     '<ul class="specs">' + m.specs.map(s => '<li>' + s[0] + ': <b>' + s[1] + '</b></li>').join('') + '</ul>' +
-    '<div class="card-actions"><p class="price" data-pris="' + m.id + '"></p><button type="button">Se ledighet</button></div>' +
+    '<div class="card-actions"><p class="price" data-pris="' + m.id + '"></p><button type="button">' + (utleieAapen ? 'Se ledighet' : 'Send forespørsel') + '</button></div>' +
     '</div>';
   el.querySelector('button').addEventListener('click', () => {
+    if (!utleieAapen) {
+      $('#f-maskin').value = m.navn;
+      $('#kontakt').scrollIntoView({ behavior: 'smooth' });
+      $('#f-maskin').focus({ preventScroll: true });
+      return;
+    }
     state.m = i; state.sel = null; render();
-    document.getElementById('ledighet').scrollIntoView({ behavior: 'smooth' });
+    $('#ledighet').scrollIntoView({ behavior: 'smooth' });
   });
   grid.appendChild(el);
 });
@@ -457,7 +471,9 @@ function visPriser(p) {
   const noen = Object.values(pm).some(x => x && (x.dogn != null || x.helg != null));
   $('#pwrap').hidden = !noen;
   $('#p-veil').textContent = noen ? 'Prisene er veiledende og ' + (p.mva_inkl ? 'inkl.' : 'eks.') + ' mva. Skal du leie lenger, eller trenger du ekstra redskap?' : 'Prislista kommer.';
-  $('#p-lev').textContent = p && p.levering != null ? ' Levering: ' + kr(p.levering) + ' per tur, levert og hentet på tomta.' : '';
+  if (p && p.levering != null) {
+    $('#p-lev').textContent = 'Transport koster ' + kr(p.levering) + ' per tur. Oppgi adressen for å få totalpris for levering og henting.';
+  }
 }
 async function hentPriser() {
   for (const url of ['https://admin.halvorsenogfjetland.no/priser.php', 'priser.json']) {
@@ -472,10 +488,20 @@ hentPriser();
 
 // Skjema: maskinvalg
 const fm = $('#f-maskin');
-MASKINER.forEach(m => { const o = document.createElement('option'); o.value = m.navn; o.textContent = m.navn; fm.appendChild(o); });
-const o = document.createElement('option'); o.value = 'Vet ikke – gi meg råd'; o.textContent = 'Vet ikke – gi meg råd'; fm.appendChild(o);
-$('#f-dato').min = iso(now); $('#f-til').min = iso(now);
-$('#f-dato').addEventListener('change', e => { const t = $('#f-til'); t.min = e.target.value || iso(now); if (t.value && t.value < t.min) t.value = ''; });
+const uavklartMaskin = 'Vet ikke – gi meg råd';
+[uavklartMaskin, ...MASKINER.map(m => m.navn)].forEach(navn => {
+  const valg = document.createElement('option');
+  valg.value = navn;
+  valg.textContent = navn;
+  fm.appendChild(valg);
+});
+$('#f-dato').min = tidligsteLeiedato;
+$('#f-til').min = tidligsteLeiedato;
+$('#f-dato').addEventListener('change', e => {
+  const til = $('#f-til');
+  til.min = e.target.value || tidligsteLeiedato;
+  if (til.value && til.value < til.min) til.value = '';
+});
 
 // Kalender
 function isBusy(mId, key) { return (bookinger[mId] || []).includes(key); }
@@ -549,9 +575,11 @@ async function hentLedighet() {
   }
   render();
 }
-hentLedighet();
-setInterval(hentLedighet, 60000);
-render();
+if (utleieAapen) {
+  hentLedighet();
+  setInterval(hentLedighet, 60000);
+  render();
+}
 
 // Skjema – sendes til webhotellet, som videresender til post@
 const SKJEMA_URL = 'https://admin.halvorsenogfjetland.no/kontakt.php';
@@ -562,12 +590,19 @@ $('#form').addEventListener('submit', async (e) => {
   if (!f.get('navn') || (!f.get('telefon') && !f.get('epost'))) {
     st.textContent = 'Fyll inn navn og telefon eller e-post.'; st.hidden = false; return;
   }
+  if (!$('#f-dato').checkValidity() || !$('#f-til').checkValidity()) {
+    st.textContent = 'Sjekk at leieperioden starter tidligst ' + parseIso(tidligsteLeiedato).toLocaleDateString('nb-NO') + ' og at sluttdatoen kommer på eller etter startdatoen.';
+    st.hidden = false;
+    return;
+  }
   knapp.disabled = true; knapp.textContent = 'Sender …';
   try {
     const r = await fetch(SKJEMA_URL, { method: 'POST', body: f });
     const j = await r.json().catch(() => ({}));
     if (!r.ok || !j.ok) throw new Error(j.feil || 'feil');
-    form.reset(); $('#f-ts').value = Date.now();
+    form.reset();
+    $('#f-til').min = tidligsteLeiedato;
+    $('#f-ts').value = Date.now();
     st.textContent = 'Takk! Forespørselen er sendt. Vi tar kontakt så snart vi kan.';
   } catch (err) {
     // Reserve: åpne e-postprogrammet med forespørselen ferdig utfylt
